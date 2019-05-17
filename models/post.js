@@ -1,23 +1,33 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define("Post", {
-    title: {
+    first_Name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    body: {
-      type: DataTypes.TEXT,
+    last_Name: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    category: {
+    address: {
       type: DataTypes.STRING,
-      defaultValue: "Personal"
-    }
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    phone_Number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
   });
   return Post;
 };

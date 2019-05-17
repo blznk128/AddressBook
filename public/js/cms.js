@@ -13,38 +13,44 @@ $(document).ready(function() {
   }
 
   // Getting jQuery references to the post body, title, form, and category select
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
+  var firstName = $("#firstName").val();
+  var lastName = $("#lastName");
   var cmsForm = $("#cms");
   var postCategorySelect = $("#category");
   // Giving the postCategorySelect a default value
   postCategorySelect.val("Personal");
-  // Adding an event listener for when the form is submitted
-  $(cmsForm).on("submit", function handleFormSubmit(event) {
+  $(".submit").on("click", function() {
     event.preventDefault();
-    // Wont submit the post if we are missing a body or a title
-    if (!titleInput.val().trim() || !bodyInput.val().trim()) {
-      return;
-    }
-    // Constructing a newPost object to hand to the database
-    var newPost = {
-      title: titleInput.val().trim(),
-      body: bodyInput.val().trim(),
-      category: postCategorySelect.val()
-    };
+    var firstName = $("#firstName").val();
+    console.log(firstName)
+  })
+  // Adding an event listener for when the form is submitted
+  // $(cmsForm).on("submit", function handleFormSubmit(event) {
+  //   event.preventDefault();
+  //   console.log(firstName)
+  //   // Wont submit the post if we are missing a body or a title
+  //   if (!lastName.val().trim() || !firstName.val().trim()) {
+  //     return;
+  //   }
+  //   // Constructing a newPost object to hand to the database
+  //   var newPost = {
+  //     title: lastName.val().trim(),
+  //     body: firstName.val().trim(),
+  //     category: postCategorySelect.val()
+  //   };
 
-    console.log(newPost);
+  //   console.log(newPost);
 
-    // If we're updating a post run updatePost to update a post
-    // Otherwise run submitPost to create a whole new post
-    if (updating) {
-      newPost.id = postId;
-      updatePost(newPost);
-    }
-    else {
-      submitPost(newPost);
-    }
-  });
+  //   // If we're updating a post run updatePost to update a post
+  //   // Otherwise run submitPost to create a whole new post
+  //   if (updating) {
+  //     newPost.id = postId;
+  //     updatePost(newPost);
+  //   }
+  //   else {
+  //     submitPost(newPost);
+  //   }
+  // });
 
   // Submits a new post and brings user to blog page upon completion
   function submitPost(Post) {
@@ -58,8 +64,8 @@ $(document).ready(function() {
     $.get("/api/posts/" + id, function(data) {
       if (data) {
         // If this post exists, prefill our cms forms with its data
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
+        lastName.val(data.title);
+        firstName.val(data.body);
         postCategorySelect.val(data.category);
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
