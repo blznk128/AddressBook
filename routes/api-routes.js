@@ -48,9 +48,10 @@ module.exports = function(app) {
   app.post("/api/posts", function(req, res) {
     console.log(req.body);
     db.Post.create({
-      title: req.body.title,
-      body: req.body.body,
-      category: req.body.category
+      first_Name: req.body.first_Name,
+      last_Name: req.body.last_Name,
+      address: req.body.address,
+      phone_Number: req.body.phone_Number
     })
       .then(function(dbPost) {
         res.json(dbPost);

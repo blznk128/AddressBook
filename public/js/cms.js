@@ -13,49 +13,42 @@ $(document).ready(function() {
   }
 
   // Getting jQuery references to the post body, title, form, and category select
-  var firstName = $("#firstName").val();
+  // var firstName = $("#firstName").val();
+  var firstName = $("#firstName");
   var lastName = $("#lastName");
+  var address = $("#address");
+  var phoneNumber = $("#phoneNumber");
   var cmsForm = $("#cms");
-  var postCategorySelect = $("#category");
-  // Giving the postCategorySelect a default value
-  postCategorySelect.val("Personal");
-  $(".submit").on("click", function() {
+  
+  $(cmsForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
-    var firstName = $("#firstName").val();
-    console.log(firstName)
-  })
-  // Adding an event listener for when the form is submitted
-  // $(cmsForm).on("submit", function handleFormSubmit(event) {
-  //   event.preventDefault();
-  //   console.log(firstName)
-  //   // Wont submit the post if we are missing a body or a title
-  //   if (!lastName.val().trim() || !firstName.val().trim()) {
-  //     return;
-  //   }
-  //   // Constructing a newPost object to hand to the database
-  //   var newPost = {
-  //     title: lastName.val().trim(),
-  //     body: firstName.val().trim(),
-  //     category: postCategorySelect.val()
-  //   };
+    
+    // Constructing a newPost object to hand to the database
+    var newPost = {
+      first_Name: firstName.val().trim(),
+      last_Name: lastName.val().trim(),
+      address: address.val().trim(),
+      phone_Number: phoneNumber.val().trim()
+    };
 
-  //   console.log(newPost);
+    console.log(newPost);
 
-  //   // If we're updating a post run updatePost to update a post
-  //   // Otherwise run submitPost to create a whole new post
-  //   if (updating) {
-  //     newPost.id = postId;
-  //     updatePost(newPost);
-  //   }
-  //   else {
-  //     submitPost(newPost);
-  //   }
-  // });
+    // If we're updating a post run updatePost to update a post
+    // Otherwise run submitPost to create a whole new post
+    if (updating) {
+      newPost.id = postId;
+      updatePost(newPost);
+    }
+    else {
+      submitPost(newPost);
+    }
+  });
 
   // Submits a new post and brings user to blog page upon completion
   function submitPost(Post) {
     $.post("/api/posts/", Post, function() {
-      window.location.href = "/blog";
+      // window.location.href = "/blog";
+      console.log(Post)
     });
   }
 
@@ -64,9 +57,9 @@ $(document).ready(function() {
     $.get("/api/posts/" + id, function(data) {
       if (data) {
         // If this post exists, prefill our cms forms with its data
-        lastName.val(data.title);
+        // lastName.val(data.title);
         firstName.val(data.body);
-        postCategorySelect.val(data.category);
+        // postCategorySelect.val(data.category);
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;

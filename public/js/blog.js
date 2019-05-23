@@ -75,8 +75,8 @@ $(document).ready(function() {
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    newPostTitle.text(post.title + " ");
-    newPostBody.text(post.body);
+    newPostTitle.text(post.first_Name + " " + post.last_Name);
+    newPostBody.text(post.last_Name);
     var formattedDate = new Date(post.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     newPostDate.text(formattedDate);
