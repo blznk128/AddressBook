@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   // GET route for getting all of the posts
   app.get("/api/posts/", function(req, res) {
-    db.Post.findAll({})
+    db.Post.findAll({ order: [['first_Name', 'ASC']]})
       .then(function(dbPost) {
         res.json(dbPost);
       });

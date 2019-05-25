@@ -15,3 +15,7 @@ button.edit {
   float: right;
   margin: 5px;
 }
+
+table {
+  width: 50%
+}
