@@ -57,9 +57,10 @@ $(document).ready(function() {
     $.get("/api/posts/" + id, function(data) {
       if (data) {
         // If this post exists, prefill our cms forms with its data
-        // lastName.val(data.title);
-        firstName.val(data.body);
-        // postCategorySelect.val(data.category);
+        firstName.val(data.first_Name);
+        lastName.val(data.last_Name);
+        address.val(data.address);
+        phoneNumber.val(data.phone_Number)
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;
