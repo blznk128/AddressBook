@@ -113,7 +113,7 @@ $(document).ready(function() {
       .parent()
       .parent()
       .data("post");
-    window.location.href = "/cms?post_id=" + currentPost.id;
+    window.location.href = "/addPerson?post_id=" + currentPost.id;
   }
 
   // This function displays a message when there are no posts
@@ -121,7 +121,7 @@ $(document).ready(function() {
     blogContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("Nobody here but us chickens, navigate <a href='/cms'>here</a> to add people.");
+    messageH2.html("Nobody here but us chickens, navigate <a href='/addPerson'>here</a> to add people.");
     blogContainer.append(messageH2);
   }
 

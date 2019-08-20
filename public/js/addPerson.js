@@ -76,7 +76,7 @@ $(document).ready(function() {
       data: post
     })
       .then(function() {
-        window.location.href = "/blog";
+        window.location.href = "/addressBook";
       });
   }
 });
