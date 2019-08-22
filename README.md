@@ -1,1 +1,2 @@
-# AddressBook
+Addressbook. A simple app demonstrating node, express, javascript, jquery, sequelize technologies. A user can add a person and their
+information, edit the person of their choosing, also deleting a person as well.

@@ -1,11 +1,10 @@
 $(document).ready(function() {
   // blogContainer holds all of our posts
   var blogContainer = $(".blog-container");
-  var postCategorySelect = $("#category");
+  
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handlePostDelete);
   $(document).on("click", "button.edit", handlePostEdit);
-  postCategorySelect.on("change", handleCategoryChange);
   var posts;
 
   // This function grabs posts from the database and updates the view
@@ -33,7 +32,7 @@ $(document).ready(function() {
       url: "/api/posts/" + id
     })
       .then(function() {
-        getPosts(postCategorySelect.val());
+        getPosts();
       });
   }
 
@@ -62,35 +61,17 @@ $(document).ready(function() {
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-default");
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
-    var newPostCategory = $("<h5>");
-    newPostCategory.text(post.category);
-    newPostCategory.css({
-      float: "right",
-      "font-weight": "700",
-      "margin-top":
-      "-15px"
-    });
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
-    // newPostTitle.text(post.first_Name + " " + post.last_Name + post.address);
-    // newPostBody.text(post.last_Name);
-    // var formattedDate = new Date(post.createdAt);
-    // formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    // newPostDate.text(formattedDate);
-    // newPostTitle.append(newPostDate);
     newPostCardHeading.append(deleteBtn);
     newPostCardHeading.append(editBtn);
     newPostCardHeading.append("<table>" + "<tr>" + "<th>" + "First Name" + "</th>" + "<th>" + "Last Name" + "</th>" + "<th>" + 
     "Address" + "</th>" + "<th>" + "Phone Number" + "</th>" + "</tr>" + 
     "<tr>" + "<td>" + post.first_Name + "</td>" + "<td>" + post.last_Name + "</td>" + "<td>" + 
     post.address + "</td>" + "<td>" + post.phone_Number + "</td>" +"</tr>" + "</table>");
-    // newPostCardHeading.append(newPostCategory);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
-    // newPostCard.append(newPostCardBody);
     newPostCard.data("post", post);
     console.log("this is post data:" + newPostCard.data())
     return newPostCard;
@@ -124,11 +105,4 @@ $(document).ready(function() {
     messageH2.html("Nobody here but us chickens, navigate <a href='/addPerson'>here</a> to add people.");
     blogContainer.append(messageH2);
   }
-
-  // This function handles reloading new posts when the category changes
-  function handleCategoryChange() {
-    var newPostCategory = $(this).val();
-    getPosts(newPostCategory);
-  }
-
 });

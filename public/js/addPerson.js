@@ -6,7 +6,7 @@ $(document).ready(function() {
   var updating = false;
 
   // If we have this section in our url, we pull out the post id from the url
-  // In localhost:8080/cms?post_id=1, postId is 1
+  // In localhost:8080/addperson?post_id=1, postId is 1
   if (url.indexOf("?post_id=") !== -1) {
     postId = url.split("=")[1];
     getPostData(postId);
@@ -18,9 +18,9 @@ $(document).ready(function() {
   var lastName = $("#lastName");
   var address = $("#address");
   var phoneNumber = $("#phoneNumber");
-  var cmsForm = $("#cms");
+  var addForm = $("#add");
   
-  $(cmsForm).on("submit", function handleFormSubmit(event) {
+  $(addForm).on("submit", function handleFormSubmit(event) {
     event.preventDefault();
     
     // Constructing a newPost object to hand to the database
@@ -30,7 +30,6 @@ $(document).ready(function() {
       address: address.val().trim(),
       phone_Number: phoneNumber.val().trim()
     };
-
     console.log(newPost);
 
     // If we're updating a post run updatePost to update a post
@@ -56,13 +55,10 @@ $(document).ready(function() {
   function getPostData(id) {
     $.get("/api/posts/" + id, function(data) {
       if (data) {
-        // If this post exists, prefill our cms forms with its data
         firstName.val(data.first_Name);
         lastName.val(data.last_Name);
         address.val(data.address);
         phoneNumber.val(data.phone_Number)
-        // If we have a post with this id, set a flag for us to know to update the post
-        // when we hit submit
         updating = true;
       }
     });
