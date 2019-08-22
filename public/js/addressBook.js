@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  // blogContainer holds all of our posts
-  var blogContainer = $(".blog-container");
+  // peopleContainer holds all of our posts
+  var peopleContainer = $(".people");
   
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handlePostDelete);
@@ -9,11 +9,7 @@ $(document).ready(function() {
 
   // This function grabs posts from the database and updates the view
   function getPosts(category) {
-    var categoryString = category || "";
-    if (categoryString) {
-      categoryString = "/category/" + categoryString;
-    }
-    $.get("/api/posts" + categoryString, function(data) {
+    $.get("/api/posts", function(data) {
       console.log("Posts", data);
       posts = data;
       if (!posts || !posts.length) {
@@ -39,14 +35,14 @@ $(document).ready(function() {
   // Getting the initial list of posts
   getPosts();
   // InitializeRows handles appending all of our constructed post HTML inside
-  // blogContainer
+  // peopleContainer
   function initializeRows() {
-    blogContainer.empty();
+    peopleContainer.empty();
     var postsToAdd = [];
     for (var i = 0; i < posts.length; i++) {
       postsToAdd.push(createNewRow(posts[i]));
     }
-    blogContainer.append(postsToAdd);
+    peopleContainer.append(postsToAdd);
   }
 
   // This function constructs a post's HTML
@@ -99,10 +95,10 @@ $(document).ready(function() {
 
   // This function displays a message when there are no posts
   function displayEmpty() {
-    blogContainer.empty();
+    peopleContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
     messageH2.html("Nobody here but us chickens, navigate <a href='/addPerson'>here</a> to add people.");
-    blogContainer.append(messageH2);
+    peopleContainer.append(messageH2);
   }
 });
