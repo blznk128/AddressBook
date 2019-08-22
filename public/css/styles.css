@@ -1,15 +1,11 @@
-/* button.submit {
-  float: right;
-} */
-
 form#cms {
   margin-top: 50px;
 }
 
-#cms textarea {
-  resize: none;
-}
+#title {
+  text-align: center;
 
+}
 .card-header button.delete,
 button.edit {
   float: right;
@@ -18,4 +14,8 @@ button.edit {
 
 table {
   width: 50%
+}
+
+.people {
+  padding-top: 40px;
 }
